@@ -57,7 +57,7 @@ block() {
 # A git invocation, with global options such as -C <dir> or -c key=value before the subcommand.
 GIT='git([[:space:]]+-[Cc][[:space:]]+[^[:space:]]+|[[:space:]]+-[^[:space:]]+)*[[:space:]]+'
 
-PLAIN="Explique para a pessoa em linguagem simples, sem jargão de git, o que você ia fazer e o caminho seguro. A skill fabrica-de-asas:versoes descreve as alternativas."
+PLAIN="Explique para a pessoa em linguagem simples, sem jargão de git, o que você ia fazer e o caminho seguro. Para voltar atrás, prefira sempre uma versão nova que desfaz a antiga (git revert)."
 
 # 1. Versions already in the cloud are never rewritten or deleted.
 # Only the push itself is inspected, so flags of other chained commands (rm -f) do not count.

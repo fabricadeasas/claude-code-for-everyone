@@ -41,7 +41,7 @@ As preferências da Fábrica de Asas são o padrão; o CLAUDE.md da pessoa vale 
 Se a mudança valer só para um projeto, escreva no CLAUDE.md da pasta do projeto em vez do pessoal.
 
 ## Desligar tudo e usar só as próprias preferências
-Rode `off`. A pasta some e passam a valer só os CLAUDE.md da pessoa. As skills do plugin (versões, publicar com segurança) continuam disponíveis; para tirar tudo, veja "Remover o plugin". Para voltar: `on`.
+Rode `off`. A pasta some e passam a valer só os CLAUDE.md da pessoa. As skills do plugin (versionamento, publicar com segurança) continuam disponíveis; para tirar tudo, veja "Remover o plugin". Para voltar: `on`.
 
 ## Atualização do plugin
 As novidades da Fábrica de Asas chegam quando o próprio plugin se atualiza. Para marketplaces que não são da Anthropic, isso vem **desligado** de fábrica, então confira:

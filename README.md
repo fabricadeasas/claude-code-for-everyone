@@ -2,29 +2,29 @@
 
 **English** · [Português (Brasil)](README.pt-BR.md)
 
-Out of the box, Claude Code is set up to talk to programmers. It answers in jargon and assumes you know what to ask for: automated tests, access control, SQL injection protection, a backup before touching the database.
+Out of the box, Claude Code is set up to talk to programmers. It answers in jargon and assumes you know what to ask for: automated tests, access control, protection against SQL injection, a backup before touching the database.
 
-People who don't program don't know these things exist, so they never ask. This package solves both sides of the problem with two text files:
+People who don't code don't know these things exist, so they never ask for them. This package fixes both sides of the problem with two text files:
 
-- **Communication style** (`plain-language.md`): Claude starts explaining in everyday language, without jargon, telling you what changed in practice instead of what code changed.
-- **Guidelines** (`CLAUDE.md`): Claude starts following good engineering practices on its own, without you asking, the way a software engineer would. It becomes your development team, and you're the boss.
+- **Communication style** (`plain-language.md`): Claude explains things in everyday language, without jargon, telling you what changed in practice instead of what code changed.
+- **Guidelines** (`CLAUDE.md`): Claude follows engineering best practices on its own, without you asking, the way a software engineer would. It becomes your development team, and you're the boss.
 
 ## Who it's for
 
-For people who use Claude Code to build or maintain a system without being from the field: business owners, analysts, professionals from other areas who learned to ask AI for things. If you're a programmer, it works too, but the guidelines were written with people who don't know what to demand in mind.
+It's for people who use Claude Code to build or maintain a system without being from the field: business owners, analysts, professionals from other areas who learned to ask AI for things. If you're a programmer, it works too, but the guidelines were written with people who don't know what to demand in mind.
 
-## Easiest way: the plugin
+## The easiest way: the plugin
 
-The `fabrica-de-asas` plugin installs everything on its own and keeps it up to date. You don't copy or edit any file.
+The `fabrica-de-asas` plugin installs everything by itself and keeps it up to date. You don't copy or edit any file.
 
-For now, the plugin only exists in Portuguese.
+For now, the plugin is only available in Portuguese.
 
 | What it brings | In practice |
 | --- | --- |
-| **Preferences that update themselves** | The guidelines and the way of talking arrive and get refreshed without you touching anything |
-| **Versions without jargon** | Claude saves your project's versions and sends the copy to GitHub on its own. You only hear the word "version" |
-| **Safety lock** | Commands that would erase versions or send passwords to the cloud are blocked before they run |
-| **You in control** | Change a preference, turn them all off, or choose whether updates arrive on their own, with a question first, or only when you ask |
+| **Preferences that update themselves** | The guidelines and the way of talking arrive and stay current without you touching anything |
+| **Versions without jargon** | Claude saves the versions of your project and sends the copy to GitHub by itself. You only hear about "versions". You can also ask directly: `/fabrica-de-asas:versionamento-salvar`, `-sincronizar`, `-baixar` and `-fundir` |
+| **Safety lock** | Commands that would delete versions or send passwords to the cloud are blocked before they run |
+| **You in control** | Change a preference, turn them all off, or choose whether updates arrive on their own, with a question, or only when you ask |
 
 ### How to install
 
@@ -34,7 +34,7 @@ In Claude Code, type:
 /plugin install fabrica-de-asas --marketplace fabricadeasas/claude-code-for-everyone
 ```
 
-It needs Claude Code 2.1.275 or newer. On earlier versions, it takes two commands:
+You need Claude Code 2.1.275 or newer. On earlier versions, it takes two commands:
 
 ```
 /plugin marketplace add fabricadeasas/claude-code-for-everyone
@@ -43,17 +43,17 @@ It needs Claude Code 2.1.275 or newer. On earlier versions, it takes two command
 
 You can also ask Claude itself: "Install the fabrica-de-asas plugin from the fabricadeasas/claude-code-for-everyone marketplace and turn on its automatic updates."
 
-The preferences take effect **starting from the second conversation**: in the first one, the plugin only puts them in place.
+The preferences take effect **from the second conversation on**: in the first one, the plugin only puts them in place.
 
 Requirement: Git installed. On Windows, the plugin uses Git Bash, which comes with Git.
 
 ### Automatic updates
 
-Claude Code comes with automatic updates turned off for plugins that aren't from Anthropic. To get new versions on their own, turn it on once: ask Claude "turn on automatic updates for the Fábrica de Asas plugin", or use `/plugin` → Marketplaces → fabricadeasas → Enable auto-update.
+Claude Code ships with automatic updates turned off for plugins that aren't from Anthropic. To get new versions on their own, turn it on once: ask Claude "turn on automatic updates for the Fábrica de Asas plugin", or use `/plugin` → Marketplaces → fabricadeasas → Enable auto-update.
 
 ### Adjust or turn off
 
-Talk to Claude, no commands to memorize:
+Just talk to Claude, no commands to memorize:
 
 - "I want to change a Fábrica de Asas preference": it saves the change in your `CLAUDE.md`, which always takes priority over the plugin's default.
 - "Turn off the Fábrica de Asas preferences": only yours apply from then on.
@@ -62,14 +62,14 @@ Talk to Claude, no commands to memorize:
 ### How it works inside
 
 ```
-.claude-plugin/marketplace.json           catalog (the fabricadeasas "marketplace")
+.claude-plugin/marketplace.json           catalog (the "fabricadeasas" marketplace)
 plugins/fabrica-de-asas/rules/            the preferences, in short files by topic
-plugins/fabrica-de-asas/skills/           versions, safe publishing, preference control
+plugins/fabrica-de-asas/skills/           versionamento-*, safe publishing, preference control
 plugins/fabrica-de-asas/hooks/hooks.json  triggers: conversation start and git lock
 plugins/fabrica-de-asas/scripts/          what the triggers run
 ```
 
-At the start of each conversation, the plugin copies the preferences to `~/.claude/rules/fabrica-de-asas/`, a folder Claude Code reads on its own and with no size limit. Your choices (on or off, update mode) are kept in the plugin's data folder, which survives updates.
+At the start of each conversation, the plugin copies the preferences to `~/.claude/rules/fabrica-de-asas/`, a folder Claude Code reads by itself with no size limit. Your choices (on or off, update mode) are kept in the plugin's data folder, which survives updates.
 
 ## Manual installation (without the plugin)
 
@@ -82,13 +82,13 @@ en/plain-language.md          communication style (English)
 
 Pick the folder for your language. The content is the same in both; only the language changes. With the manual way, updates don't arrive on their own.
 
-Both files go in your personal Claude folder, so they apply to all your projects. `~` is your user folder:
+Both files go into your personal Claude folder, so they apply to all your projects. `~` is your user folder:
 
 | System | Folder |
 | --- | --- |
-| Windows | `C:\Users\seu-nome\.claude\` |
-| Mac | `/Users/seu-nome/.claude/` |
-| Linux | `/home/seu-nome/.claude/` |
+| Windows | `C:\Users\your-name\.claude\` |
+| Mac | `/Users/your-name/.claude/` |
+| Linux | `/home/your-name/.claude/` |
 
 If the `.claude` folder doesn't exist, create it.
 
@@ -110,19 +110,19 @@ Copy `CLAUDE.md` to `~/.claude/CLAUDE.md`. If you already have a `CLAUDE.md` the
 
 ## The trap almost everyone falls into
 
-By default, a custom output style erases Claude Code's software engineering instructions (reviewing its own work, keeping the scope of the change in check, verifying what it did). In other words: it starts talking nicely and programming worse.
+By default, a custom output style wipes out Claude Code's software engineering instructions (reviewing its own work, keeping the scope of a change in check, verifying what it did). In other words: it starts talking nicely and coding worse.
 
-The line `keep-coding-instructions: true` in the style's header is what prevents this. It keeps the technical skill intact and changes only the way it talks. If you adapt the file, don't remove that line.
+The `keep-coding-instructions: true` line in the style's header is what prevents this. It keeps the technical competence intact and changes only the way it talks. If you adapt the file, don't remove that line.
 
 ## What this doesn't guarantee
 
-This is guidance, not a lock. It greatly increases the chance of the behavior showing up, but it's not a deterministic guarantee: in a very long conversation, or after a context compaction, some rule may slip. For what truly needs to be guaranteed, there are Claude Code hooks, which run outside the model.
+This is guidance, not a lock. It greatly increases the chance the standard shows up, but it's not a deterministic guarantee: in a very long conversation, or after context compaction, some rule may slip. For what truly needs to be guaranteed, there are Claude Code hooks, which run outside the model.
 
 And the most important warning: this raises the floor, it doesn't replace you. Having the files is no reason to stop asking questions or to accept everything without reading. If you didn't understand a decision, ask for it to be explained again.
 
 ## Living documents
 
-These files will keep being adjusted as practice shows what works: a rule Claude ignores comes out, a missing rule goes in, confusing wording gets rewritten. Follow the repository to get the new versions. If you adapted the text to your case, keep your changes separate, so it's easy to reapply them on top of the new version.
+These files will keep being adjusted as practice shows what works: rules Claude ignores come out, missing rules go in, confusing wording gets rewritten. Follow the repository to get the new versions. If you adapted the text for your case, keep your changes separate, so it's easy to reapply them on top of the new version.
 
 ## Languages
 

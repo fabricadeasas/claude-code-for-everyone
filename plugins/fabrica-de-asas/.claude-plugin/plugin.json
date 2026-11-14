@@ -1,0 +1,13 @@
+{
+  "name": "fabrica-de-asas",
+  "displayName": "Fábrica de Asas",
+  "description": "Preferências do curso Superpoderes com IA: linguagem simples, boas práticas de engenharia e versões guardadas sem jargão. Atualizam sozinhas e podem ser ajustadas ou desligadas.",
+  "author": {
+    "name": "Guilherme Almeida Girardi",
+    "url": "https://github.com/ggirardi1"
+  },
+  "homepage": "https://github.com/fabricadeasas/claude-code-for-everyone",
+  "repository": "https://github.com/fabricadeasas/claude-code-for-everyone",
+  "license": "MIT",
+  "keywords": ["iniciantes", "linguagem-simples", "git", "boas-praticas", "pt-BR"]
+}

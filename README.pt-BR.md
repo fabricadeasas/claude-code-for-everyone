@@ -13,7 +13,67 @@ Quem não programa não sabe que essas coisas existem, então nunca pede. Este p
 
 Para quem usa o Claude Code para construir ou manter um sistema sem ser da área: dono de negócio, analista, profissional de outra área que aprendeu a pedir as coisas para a IA. Se você é programador, também funciona, mas as diretrizes foram escritas pensando em quem não sabe o que cobrar.
 
-## O que tem aqui
+## Jeito mais fácil: o plugin
+
+O plugin `fabrica-de-asas` instala tudo sozinho e mantém atualizado. Você não copia nem edita arquivo nenhum.
+
+Por enquanto, o plugin existe só em português.
+
+| O que ele traz | Na prática |
+| --- | --- |
+| **Preferências que se atualizam** | As diretrizes e o jeito de falar chegam e se renovam sem você mexer em nada |
+| **Versões sem jargão** | O Claude salva as versões do seu projeto e manda a cópia para o GitHub sozinho. Você só ouve falar em "versão". Também dá para pedir direto: `/fabrica-de-asas:versionamento-salvar`, `-sincronizar`, `-baixar` e `-fundir` |
+| **Trava de segurança** | Comandos que apagariam versões ou mandariam senhas para a nuvem são bloqueados antes de rodar |
+| **Você no controle** | Mude uma preferência, desligue todas, ou escolha se as atualizações chegam sozinhas, com pergunta, ou só quando você pedir |
+
+Vai colocar um site ou sistema no ar? O complemento `fabrica-de-asas-no-ar` (do curso de publicação) acrescenta um ambiente de testes, a publicação em produção com alerta e confirmação, e a lista do que conferir antes de abrir para o público.
+
+### Como instalar
+
+No Claude Code, digite:
+
+```
+/plugin install fabrica-de-asas --marketplace fabricadeasas/claude-code-for-everyone
+```
+
+Precisa do Claude Code 2.1.275 ou mais novo. Em versões anteriores, são dois comandos:
+
+```
+/plugin marketplace add fabricadeasas/claude-code-for-everyone
+/plugin install fabrica-de-asas@fabricadeasas
+```
+
+Também dá para pedir para o próprio Claude: "Instale o plugin fabrica-de-asas do marketplace fabricadeasas/claude-code-for-everyone e ligue a atualização automática dele."
+
+As preferências passam a valer **a partir da segunda conversa**: na primeira, o plugin só as coloca no lugar.
+
+Requisito: Git instalado. No Windows, o plugin usa o Git Bash, que vem junto com o Git.
+
+### Atualização automática
+
+O Claude Code vem com a atualização automática desligada para plugins que não são da Anthropic. Para receber as novidades sozinho, ligue uma vez: peça ao Claude "ligue a atualização automática do plugin da Fábrica de Asas", ou use `/plugin` → Marketplaces → fabricadeasas → Enable auto-update.
+
+### Ajustar ou desligar
+
+Converse com o Claude, sem decorar comando:
+
+- "Quero mudar uma preferência da Fábrica de Asas": ele grava a mudança no seu `CLAUDE.md`, que sempre vale mais que o padrão do plugin.
+- "Desliga as preferências da Fábrica de Asas": passam a valer só as suas.
+- "Me pergunta antes de atualizar as preferências" ou "só atualiza quando eu pedir".
+
+### Como funciona por dentro
+
+```
+.claude-plugin/marketplace.json           catálogo (o "marketplace" fabricadeasas)
+plugins/fabrica-de-asas/rules/            as preferências, em arquivos curtos por assunto
+plugins/fabrica-de-asas/skills/           versionamento-*, controle das preferências
+plugins/fabrica-de-asas/hooks/hooks.json  gatilhos: início de conversa e trava do git
+plugins/fabrica-de-asas/scripts/          o que os gatilhos executam
+```
+
+No começo de cada conversa, o plugin copia as preferências para `~/.claude/rules/fabrica-de-asas/`, pasta que o Claude Code lê sozinho e sem limite de tamanho. As suas escolhas (ligado ou desligado, modo de atualização) ficam guardadas na pasta de dados do plugin, que sobrevive às atualizações.
+
+## Instalação manual (sem plugin)
 
 ```
 pt-BR/CLAUDE.md               diretrizes de engenharia (português)
@@ -22,9 +82,7 @@ en/CLAUDE.md                  diretrizes de engenharia (inglês)
 en/plain-language.md          estilo de comunicação (inglês)
 ```
 
-Escolha a pasta do seu idioma. O conteúdo é o mesmo nas duas; só a língua muda.
-
-## Instalação
+Escolha a pasta do seu idioma. O conteúdo é o mesmo nas duas; só a língua muda. Do jeito manual, as atualizações não chegam sozinhas.
 
 Os dois arquivos vão para a sua pasta pessoal do Claude, e por isso valem para todos os seus projetos. `~` é a sua pasta de usuário:
 
@@ -82,4 +140,4 @@ O comando usa o Claude Code da sua máquina (`claude -p`, precisa estar logado) 
 
 ## Sobre
 
-Criado por [Guilherme Almeida Girardi](https://github.com/ggirardi1) como parte do treinamento de IA e Claude da [1Salto](https://1salto.com). Licença MIT.
+Criado por [Guilherme Almeida Girardi](https://github.com/ggirardi1) como parte do curso Superpoderes com IA, da [Fábrica de Asas](https://fabricadeasas.com.br). Licença MIT.

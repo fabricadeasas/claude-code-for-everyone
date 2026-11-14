@@ -1,6 +1,6 @@
 ---
 name: preferencias
-description: Controla as preferências da Fábrica de Asas que o plugin instala. Use quando a pessoa quiser ver, mudar, desligar ou religar as preferências da Fábrica de Asas, escolher como recebe as atualizações (automática, perguntar antes, só quando pedir), trazer ou recusar uma atualização, ver o que mudou numa atualização, ligar a atualização automática do plugin ou remover o plugin. Use também quando o começo da conversa avisar que há uma atualização das preferências.
+description: Controla as preferências da Fábrica de Asas que o plugin instala. Use quando a pessoa quiser ver, mudar, desligar ou religar as preferências da Fábrica de Asas, escolher como recebe as atualizações (automática, perguntar antes, só quando pedir), trazer ou recusar uma atualização, ver o que mudou numa atualização, ligar a atualização automática do plugin, ligar ou desligar a trava de produção (quando a pessoa pedir para trabalhar direto na main) ou remover o plugin. Use também quando o começo da conversa avisar que há uma atualização das preferências.
 ---
 
 # Preferências da Fábrica de Asas
@@ -23,6 +23,7 @@ CLAUDE_PLUGIN_DATA="${CLAUDE_PLUGIN_DATA}" bash "${CLAUDE_PLUGIN_ROOT}/scripts/p
 | `updates auto` | Atualiza sozinho e avisa (padrão) |
 | `updates ask` | Pergunta antes de atualizar |
 | `updates manual` | Só atualiza quando a pessoa pedir |
+| `production-lock on` / `off` | Liga (padrão) ou desliga a trava de produção. Vale na hora |
 
 O script responde em linhas técnicas (`state=update-available`). Não mostre isso: traduza em uma frase.
 
@@ -41,7 +42,12 @@ As preferências da Fábrica de Asas são o padrão; o CLAUDE.md da pessoa vale 
 Se a mudança valer só para um projeto, escreva no CLAUDE.md da pasta do projeto em vez do pessoal.
 
 ## Desligar tudo e usar só as próprias preferências
-Rode `off`. A pasta some e passam a valer só os CLAUDE.md da pessoa. As skills do plugin (versionamento, publicar com segurança) continuam disponíveis; para tirar tudo, veja "Remover o plugin". Para voltar: `on`.
+Rode `off`. A pasta some e passam a valer só os CLAUDE.md da pessoa. A trava de produção também deixa de valer. As skills do plugin (versionamento, publicar com segurança) continuam disponíveis; para tirar tudo, veja "Remover o plugin". Para voltar: `on`.
+
+## Trava de produção
+Com as preferências ligadas, o plugin impede que a `main`/`master` (produção) mude por outro caminho que não um pedido de junção (pull request) da `dev`. Fica bloqueado salvar ou juntar versões direto na `main` e mandar versões para a `main` do GitHub.
+
+Só desligue (`production-lock off`) quando a própria pessoa pedir para trabalhar direto na `main`, com essas palavras. Nunca desligue por conta própria para destravar um comando bloqueado. Antes, explique em uma frase o risco: "Sem a trava, uma mudança pode ir para o ar sem passar pelo ambiente de testes nem pelo seu ok." Para religar: `production-lock on`.
 
 ## Atualização do plugin
 As novidades da Fábrica de Asas chegam quando o próprio plugin se atualiza. Para marketplaces que não são da Anthropic, isso vem **desligado** de fábrica, então confira:

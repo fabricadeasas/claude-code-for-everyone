@@ -5,7 +5,7 @@ description: Publica o projeto em produção (leva a linha dev para a main, que 
 
 # Publicar em produção
 
-Produção é o que está no ar para todo mundo. Nesta forma de trabalhar, a linha `main` (ou `master`) é produção: só recebe versões por aqui, e quem coloca no ar é a automação do GitHub (GitHub Actions) quando a `main` recebe uma versão nova.
+Produção é o que está no ar para todo mundo. Nesta forma de trabalhar, a linha `main` (ou `master`) é produção: só recebe versões por um pedido de junção (pull request) da `dev`, aberto por aqui, e quem coloca no ar é a automação do GitHub (GitHub Actions) quando a `main` recebe uma versão nova.
 
 ## 1. Existe publicação configurada?
 Leia os arquivos de `.github/workflows/`. Há publicação em produção quando um deles roda ao receber versões na `main`/`master` (`on: push` com essa linha, ou `workflow_dispatch` usado para isso) e tem passos que mandam o projeto para um servidor (ssh, rsync, scp, script de deploy, CLI de hospedagem como Vercel, Netlify, Fly, Railway, Render, Cloudflare, AWS, Google Cloud, Azure, ou `environment: production`). Um workflow que só roda testes não publica nada.
@@ -35,8 +35,8 @@ Sem um sim claro, não siga. Um sim dado antes do alerta não vale.
    `gh pr create --base main --head dev --title "<resumo do que vai ao ar>" --body "<lista das mudanças>"`
    `gh pr merge --merge` (use `--merge`, nunca `--squash` ou `--rebase`: eles fazem a `main` e a `dev` divergirem).
    Se o GitHub exigir que os testes passem antes, espere com `gh pr checks --watch`.
-2. Se o `gh` não funcionar para este repositório, junte direto: `git switch main`, `git pull --ff-only`, `git merge dev`, `git push`, `git switch dev`.
-3. Volte a trabalhar na `dev` e traga a `main` atualizada: `git switch dev` e `git pull --no-rebase origin main` se a `main` ganhou uma versão de junção.
+2. Este é o único caminho para a `main`. Nunca junte nem mande nada direto nela (`git merge` ou `git push` na `main`): o plugin bloqueia. Se o `gh` não funcionar, resolva a causa (falta de login: peça para a pessoa rodar `gh auth login`) e tente de novo. Se a cópia das versões não está no GitHub, não há como publicar por aqui: explique e ofereça criar a cópia (skill `fabrica-de-asas:versionamento-sincronizar`).
+3. Continue na `dev` e traga a versão de junção da `main`: `git pull --no-rebase origin main`.
 
 ## 5. Acompanhe e confira
 1. Acompanhe a publicação: `gh run list --branch main --limit 1` e `gh run watch <id> --exit-status`.

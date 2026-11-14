@@ -13,9 +13,9 @@
 
 ## Duas linhas: `dev` para trabalhar, `main` para produção
 - Trabalhe sempre na linha `dev`, sem a pessoa pedir e sem comentar. Se o projeto ainda não tem `dev`, crie a partir da `main` (veja a skill de sincronizar). Se o projeto já usa `develop` em vez de `dev`, use a `develop`.
-- A `main` (ou `master`) é produção. Ela só recebe versões pela skill `fabrica-de-asas:versionamento-publicar-prod`, que sempre alerta e pede confirmação. Fora a primeira versão de um projeto novo, nunca salve nem mande versões direto na `main`.
+- A `main` (ou `master`) é produção. Ela só recebe versões por um pedido de junção (pull request) da `dev`, pela skill `fabrica-de-asas:versionamento-publicar-prod`, que sempre alerta e pede confirmação. Fora a primeira versão de um projeto novo, nunca salve, junte ou mande versões direto na `main`. O plugin bloqueia (trava de produção).
 - Com a pessoa, fale em "ambiente de testes" e "produção" (ou "no ar"), não em `dev` e `main`.
-- Se o CLAUDE.md da pessoa ou do projeto pedir outro jeito de trabalhar com as linhas, vale o dela.
+- Se o CLAUDE.md da pessoa ou do projeto pedir outro jeito de trabalhar com as linhas, vale o dela. Se esse jeito for mexer direto na `main`, a trava de produção precisa ser desligada pela skill `fabrica-de-asas:preferencias`, só quando a pessoa pedir.
 
 ## Skills de versionamento
 Use a skill certa sempre que for fazer uma destas operações:

@@ -12,6 +12,8 @@
 #                 auto   copies every new version as soon as the plugin brings it
 #                 ask    keeps the accepted version and asks the student at session start
 #                 manual keeps the accepted version until the student asks to update
+#   production_lock = on | off      on: guard-git.sh blocks any change to main/master that does
+#                                   not come through a pull request from dev
 #
 # Usage:
 #   preferences.sh session-start          SessionStart hook: sync and print the hook JSON
@@ -21,6 +23,7 @@
 #   preferences.sh decline                do not ask again about the version the plugin brings now
 #   preferences.sh on | off               turn the Fábrica preferences on or off
 #   preferences.sh updates <mode>         auto | ask | manual
+#   preferences.sh production-lock <on|off>
 #
 # Rules written by this script take effect in the NEXT session: Claude Code
 # reads the rules folder before SessionStart hooks run.
@@ -58,6 +61,7 @@ SKILL="fabrica-de-asas:preferencias"
 
 PREFERENCES="on"
 UPDATES="auto"
+PRODUCTION_LOCK="on"
 INSTALLED=""
 DECLINED=""
 
@@ -69,6 +73,7 @@ load_config() {
         case "$key" in
             preferences) PREFERENCES="$value" ;;
             updates) UPDATES="$value" ;;
+            production_lock) PRODUCTION_LOCK="$value" ;;
             installed) INSTALLED="$value" ;;
             declined) DECLINED="$value" ;;
         esac
@@ -77,8 +82,8 @@ load_config() {
 
 save_config() {
     mkdir -p "$DATA_DIR" || return 1
-    printf 'preferences=%s\nupdates=%s\ninstalled=%s\ndeclined=%s\n' \
-        "$PREFERENCES" "$UPDATES" "$INSTALLED" "$DECLINED" > "$CONFIG_FILE.tmp" &&
+    printf 'preferences=%s\nupdates=%s\nproduction_lock=%s\ninstalled=%s\ndeclined=%s\n' \
+        "$PREFERENCES" "$UPDATES" "$PRODUCTION_LOCK" "$INSTALLED" "$DECLINED" > "$CONFIG_FILE.tmp" &&
         mv -f "$CONFIG_FILE.tmp" "$CONFIG_FILE"
 }
 
@@ -229,6 +234,7 @@ status() {
     fi
     echo "preferences=$PREFERENCES"
     echo "updates=$UPDATES"
+    echo "production_lock=$PRODUCTION_LOCK"
     echo "state=$state"
     echo "edited_by_hand=$([ -n "$INSTALLED" ] && [ -d "$TARGET_DIR" ] && [ "$installed_now" != "$INSTALLED" ] && echo yes || echo no)"
     echo "rules_folder=$TARGET_DIR"
@@ -254,6 +260,16 @@ set_updates() {
     UPDATES="$1"
     DECLINED=""
     save_config && echo "updates=$UPDATES"
+}
+
+set_production_lock() {
+    case "${1:-}" in
+        on | off) ;;
+        *) echo "Use: production-lock on | off" >&2; return 1 ;;
+    esac
+    load_config
+    PRODUCTION_LOCK="$1"
+    save_config && echo "production_lock=$PRODUCTION_LOCK (takes effect immediately)"
 }
 
 main() {
@@ -282,8 +298,9 @@ main() {
             remove_rules && echo "Off. Takes effect in the next session."
             ;;
         updates) set_updates "${2:-}" ;;
+        production-lock) set_production_lock "${2:-}" ;;
         *)
-            echo "Use: session-start | status | diff | apply | decline | on | off | updates <auto|ask|manual>" >&2
+            echo "Use: session-start | status | diff | apply | decline | on | off | updates <auto|ask|manual> | production-lock <on|off>" >&2
             return 1
             ;;
     esac

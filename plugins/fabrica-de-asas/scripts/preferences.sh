@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# Keeps the Fábrica de Asas rules installed in the user's rules folder
-# (~/.claude/rules/fabrica-de-asas/), where Claude Code loads them natively at
+# Keeps a Fábrica de Asas plugin's rules installed in the user's rules folder
+# (~/.claude/rules/<plugin name>/), where Claude Code loads them natively at
 # the start of every session, with no size cap.
 #
 # The plugin ships the rules in ./rules. This script copies them to the rules
@@ -12,8 +12,6 @@
 #                 auto   copies every new version as soon as the plugin brings it
 #                 ask    keeps the accepted version and asks the student at session start
 #                 manual keeps the accepted version until the student asks to update
-#   production_lock = on | off      on: guard-git.sh blocks any change to main/master that does
-#                                   not come through a pull request from dev
 #
 # Usage:
 #   preferences.sh session-start          SessionStart hook: sync and print the hook JSON
@@ -21,9 +19,8 @@
 #   preferences.sh diff                   what changes between the installed and the new version
 #   preferences.sh apply                  install the version the plugin brings now
 #   preferences.sh decline                do not ask again about the version the plugin brings now
-#   preferences.sh on | off               turn the Fábrica preferences on or off
+#   preferences.sh on | off               turn this plugin's preferences on or off
 #   preferences.sh updates <mode>         auto | ask | manual
-#   preferences.sh production-lock <on|off>
 #
 # Rules written by this script take effect in the NEXT session: Claude Code
 # reads the rules folder before SessionStart hooks run.
@@ -47,13 +44,25 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PLUGIN_ROOT="$(to_unix_path "${CLAUDE_PLUGIN_ROOT:-$SCRIPT_DIR/..}")"
 SOURCE_DIR="$PLUGIN_ROOT/rules"
 CONFIG_HOME="$(to_unix_path "${CLAUDE_CONFIG_DIR:-$HOME/.claude}")"
-TARGET_DIR="$CONFIG_HOME/rules/fabrica-de-asas"
-# Fallback matches the data folder Claude Code creates for fabrica-de-asas@fabricadeasas.
-DATA_DIR="$(to_unix_path "${CLAUDE_PLUGIN_DATA:-$CONFIG_HOME/plugins/data/fabrica-de-asas-fabricadeasas}")"
+
+# The same script serves every Fábrica de Asas plugin: names come from the plugin manifest.
+manifest_field() {
+    grep -o -E "\"$1\"[[:space:]]*:[[:space:]]*\"[^\"]*\"" "$PLUGIN_ROOT/.claude-plugin/plugin.json" 2>/dev/null |
+        head -n 1 |
+        sed -E 's/.*:[[:space:]]*"([^"]*)"$/\1/'
+}
+PLUGIN_NAME="$(manifest_field name)"
+PLUGIN_NAME="${PLUGIN_NAME:-fabrica-de-asas}"
+LABEL="$(manifest_field displayName)"
+LABEL="${LABEL:-$PLUGIN_NAME}"
+
+TARGET_DIR="$CONFIG_HOME/rules/$PLUGIN_NAME"
+# Fallback matches the data folder Claude Code creates for <plugin>@fabricadeasas.
+DATA_DIR="$(to_unix_path "${CLAUDE_PLUGIN_DATA:-$CONFIG_HOME/plugins/data/$PLUGIN_NAME-fabricadeasas}")"
 CONFIG_FILE="$DATA_DIR/config"
 
-MARKER="FABRICA_DE_ASAS_ATIVO"
-SKILL="fabrica-de-asas:preferencias"
+MARKER="$(printf '%s' "$PLUGIN_NAME" | tr 'a-z-' 'A-Z_')_ATIVO"
+SKILL="$PLUGIN_NAME:preferencias"
 
 # ---------------------------------------------------------------------------
 # Config (key=value lines, so no JSON parser is needed)
@@ -61,7 +70,6 @@ SKILL="fabrica-de-asas:preferencias"
 
 PREFERENCES="on"
 UPDATES="auto"
-PRODUCTION_LOCK="on"
 INSTALLED=""
 DECLINED=""
 
@@ -73,7 +81,6 @@ load_config() {
         case "$key" in
             preferences) PREFERENCES="$value" ;;
             updates) UPDATES="$value" ;;
-            production_lock) PRODUCTION_LOCK="$value" ;;
             installed) INSTALLED="$value" ;;
             declined) DECLINED="$value" ;;
         esac
@@ -82,8 +89,8 @@ load_config() {
 
 save_config() {
     mkdir -p "$DATA_DIR" || return 1
-    printf 'preferences=%s\nupdates=%s\nproduction_lock=%s\ninstalled=%s\ndeclined=%s\n' \
-        "$PREFERENCES" "$UPDATES" "$PRODUCTION_LOCK" "$INSTALLED" "$DECLINED" > "$CONFIG_FILE.tmp" &&
+    printf 'preferences=%s\nupdates=%s\ninstalled=%s\ndeclined=%s\n' \
+        "$PREFERENCES" "$UPDATES" "$INSTALLED" "$DECLINED" > "$CONFIG_FILE.tmp" &&
         mv -f "$CONFIG_FILE.tmp" "$CONFIG_FILE"
 }
 
@@ -104,8 +111,10 @@ rules_hash() {
 
 # Refuses to touch anything that is not our own folder.
 assert_safe_target() {
+    printf '%s' "$PLUGIN_NAME" | grep -Eq '^[a-z0-9]+(-[a-z0-9]+)*$' ||
+        { echo "Invalid plugin name in the manifest: '$PLUGIN_NAME'" >&2; return 1; }
     case "$TARGET_DIR" in
-        */rules/fabrica-de-asas) return 0 ;;
+        */rules/"$PLUGIN_NAME") return 0 ;;
         *) echo "Refusing to write outside the rules folder: $TARGET_DIR" >&2; return 1 ;;
     esac
 }
@@ -158,8 +167,8 @@ emit() {
 }
 
 active_context() {
-    printf '%s: as preferências da Fábrica de Asas (pasta ~/.claude/rules/fabrica-de-asas/) estão ativas nesta conversa. Atualizações: %s.' \
-        "$MARKER" "$UPDATES"
+    printf '%s: as preferências do plugin %s (pasta ~/.claude/rules/%s/) estão ativas nesta conversa. Atualizações: %s.' \
+        "$MARKER" "$LABEL" "$PLUGIN_NAME" "$UPDATES"
 }
 
 session_start() {
@@ -167,7 +176,7 @@ session_start() {
 
     if [ "$PREFERENCES" = "off" ]; then
         [ -d "$TARGET_DIR" ] && remove_rules
-        emit "As preferências da Fábrica de Asas estão desligadas por escolha da pessoa. Siga só o CLAUDE.md dela. Para religar, use a skill $SKILL."
+        emit "As preferências do plugin $LABEL estão desligadas por escolha da pessoa. Não aplique o que elas diziam; vale o CLAUDE.md dela. Para religar, use a skill $SKILL."
         return
     fi
 
@@ -176,11 +185,11 @@ session_start() {
 
     if [ ! -d "$TARGET_DIR" ] || [ -z "$INSTALLED" ]; then
         if install_rules; then
-            emit "As preferências da Fábrica de Asas acabaram de ser instaladas e só passam a valer a partir da próxima conversa. Se fizer sentido, avise a pessoa disso uma vez, em uma frase. Na mesma ocasião, confira se a atualização automática do plugin está ligada, como explica a skill $SKILL (seção \"Atualização do plugin\"), e ofereça ligar se não estiver." \
-                "Fábrica de Asas: preferências instaladas. Elas valem a partir da próxima conversa."
+            emit "As preferências do plugin $LABEL acabaram de ser instaladas e só passam a valer a partir da próxima conversa. Se fizer sentido, avise a pessoa disso uma vez, em uma frase. Na mesma ocasião, confira se a atualização automática do plugin está ligada, como explica a skill $SKILL (seção \"Atualização do plugin\"), e ofereça ligar se não estiver." \
+                "$LABEL: preferências instaladas. Elas valem a partir da próxima conversa."
         else
-            emit "Não foi possível instalar as preferências da Fábrica de Asas na pasta ~/.claude/rules/fabrica-de-asas/. Avise a pessoa em linguagem simples e ofereça investigar com a skill $SKILL." \
-                "Fábrica de Asas: não consegui instalar as preferências."
+            emit "Não foi possível instalar as preferências do plugin $LABEL na pasta ~/.claude/rules/$PLUGIN_NAME/. Avise a pessoa em linguagem simples e ofereça investigar com a skill $SKILL." \
+                "$LABEL: não consegui instalar as preferências."
         fi
         return
     fi
@@ -195,8 +204,8 @@ session_start() {
             if [ "$DECLINED" = "$available" ]; then
                 emit "$(active_context)"
             else
-                emit "$(active_context) Há uma versão nova das preferências da Fábrica de Asas, e a pessoa pediu para ser consultada antes de atualizar. Na sua primeira resposta desta conversa, pergunte em uma frase se ela quer trazer as novidades agora e ofereça mostrar o que mudou. Para mostrar, aplicar ou recusar, use a skill $SKILL." \
-                    "Fábrica de Asas: há uma atualização das preferências."
+                emit "$(active_context) Há uma versão nova das preferências do plugin $LABEL, e a pessoa pediu para ser consultada antes de atualizar. Na sua primeira resposta desta conversa, pergunte em uma frase se ela quer trazer as novidades agora e ofereça mostrar o que mudou. Para mostrar, aplicar ou recusar, use a skill $SKILL." \
+                    "$LABEL: há uma atualização das preferências."
             fi
             ;;
         manual)
@@ -205,10 +214,10 @@ session_start() {
         *)
             if install_rules; then
                 emit "$(active_context) As preferências acabaram de ser atualizadas e as novidades valem a partir da próxima conversa. Se a pessoa perguntar o que mudou, use a skill $SKILL." \
-                    "Fábrica de Asas: preferências atualizadas. As novidades valem a partir da próxima conversa."
+                    "$LABEL: preferências atualizadas. As novidades valem a partir da próxima conversa."
             else
                 emit "$(active_context) A atualização automática das preferências falhou. Avise a pessoa em linguagem simples e ofereça investigar com a skill $SKILL." \
-                    "Fábrica de Asas: não consegui atualizar as preferências."
+                    "$LABEL: não consegui atualizar as preferências."
             fi
             ;;
     esac
@@ -234,7 +243,6 @@ status() {
     fi
     echo "preferences=$PREFERENCES"
     echo "updates=$UPDATES"
-    echo "production_lock=$PRODUCTION_LOCK"
     echo "state=$state"
     echo "edited_by_hand=$([ -n "$INSTALLED" ] && [ -d "$TARGET_DIR" ] && [ "$installed_now" != "$INSTALLED" ] && echo yes || echo no)"
     echo "rules_folder=$TARGET_DIR"
@@ -260,16 +268,6 @@ set_updates() {
     UPDATES="$1"
     DECLINED=""
     save_config && echo "updates=$UPDATES"
-}
-
-set_production_lock() {
-    case "${1:-}" in
-        on | off) ;;
-        *) echo "Use: production-lock on | off" >&2; return 1 ;;
-    esac
-    load_config
-    PRODUCTION_LOCK="$1"
-    save_config && echo "production_lock=$PRODUCTION_LOCK (takes effect immediately)"
 }
 
 main() {
@@ -298,9 +296,8 @@ main() {
             remove_rules && echo "Off. Takes effect in the next session."
             ;;
         updates) set_updates "${2:-}" ;;
-        production-lock) set_production_lock "${2:-}" ;;
         *)
-            echo "Use: session-start | status | diff | apply | decline | on | off | updates <auto|ask|manual> | production-lock <on|off>" >&2
+            echo "Use: session-start | status | diff | apply | decline | on | off | updates <auto|ask|manual>" >&2
             return 1
             ;;
     esac

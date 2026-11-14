@@ -1,21 +1,20 @@
 ---
 name: versionamento-fundir
-description: Junta duas linhas de versões do projeto (git merge) e resolve conflitos para quem não é programador, sem jargão. Use quando for juntar um rascunho (branch) na linha de trabalho dev, quando um pull ou merge der CONFLICT, ou quando a pessoa disser "junta o rascunho", "deu conflito" ou usar as palavras merge, branch ou PR. Levar a dev para produção (main) não é aqui: é a skill versionamento-publicar-prod.
+description: Junta duas linhas de versões do projeto (git merge) e resolve conflitos para quem não é programador, sem jargão. Use quando for juntar um rascunho (branch) na linha principal, quando um pull ou merge der CONFLICT, quando for juntar um pull request, ou quando a pessoa disser "junta o rascunho", "deu conflito" ou usar as palavras merge, branch ou PR.
 ---
 
 # Fundir versões
 
-Com a pessoa: um branch é um "rascunho", e fundir é "juntar o rascunho". Conflito é "a mesma parte do arquivo mudou nos dois lados".
-
-A linha de trabalho é a `dev` (ou `develop`). A `main` é produção e só recebe versões pela skill `fabrica-de-asas:versionamento-publicar-prod`: nunca junte nada na `main` por aqui.
+Com a pessoa: um branch é um "rascunho", e fundir é "juntar o rascunho na linha principal". Conflito é "a mesma parte do arquivo mudou nos dois lados".
 
 ## Antes de juntar
 1. Salve o que estiver pendente (skill `fabrica-de-asas:versionamento-salvar`). Fundir com mudanças não salvas mistura as coisas.
-2. Traga as novidades (skill `fabrica-de-asas:versionamento-sincronizar`).
+2. Traga as novidades da linha principal (skill `fabrica-de-asas:versionamento-sincronizar`).
 
-## Juntar um rascunho na `dev`
-- `git switch dev` e `git merge <rascunho>`.
-- Se o projeto revisa por pull request antes de juntar na `dev`: `gh pr create --base dev --head <rascunho>` e `gh pr merge --merge`.
+## Juntar um rascunho na linha principal
+- Se o projeto usa pull requests (a linha principal é protegida no GitHub ou o time revisa antes): `gh pr create` e `gh pr merge`.
+- Se não: `git switch <principal>` e `git merge <rascunho>`.
+- Se juntar na principal coloca no ar (veja a exceção na skill de sincronizar), pergunte antes.
 - Depois de juntar e mandar para a nuvem, ofereça apagar o rascunho com `git branch -d <rascunho>`. O `-d` minúsculo só apaga o que já foi juntado; nunca use `-D`.
 
 ## Quando dá conflito

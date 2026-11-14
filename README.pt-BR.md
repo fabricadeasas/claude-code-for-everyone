@@ -23,9 +23,10 @@ Por enquanto, o plugin existe só em português.
 | --- | --- |
 | **Preferências que se atualizam** | As diretrizes e o jeito de falar chegam e se renovam sem você mexer em nada |
 | **Versões sem jargão** | O Claude salva as versões do seu projeto e manda a cópia para o GitHub sozinho. Você só ouve falar em "versão". Também dá para pedir direto: `/fabrica-de-asas:versionamento-salvar`, `-sincronizar`, `-baixar` e `-fundir` |
-| **Publicar sem susto** | O Claude trabalha numa versão de testes. Produção só recebe mudanças com um alerta e o seu ok (`/fabrica-de-asas:versionamento-publicar-prod`). Se o projeto ainda não tem servidor configurado no GitHub, ele avisa que não há o que publicar |
-| **Trava de segurança** | Comandos que apagariam versões, mandariam senhas para a nuvem ou mudariam a produção sem passar pela versão de testes são bloqueados antes de rodar |
+| **Trava de segurança** | Comandos que apagariam versões ou mandariam senhas para a nuvem são bloqueados antes de rodar |
 | **Você no controle** | Mude uma preferência, desligue todas, ou escolha se as atualizações chegam sozinhas, com pergunta, ou só quando você pedir |
+
+Vai colocar um site ou sistema no ar? O complemento `fabrica-de-asas-no-ar` (do curso de publicação) acrescenta um ambiente de testes, a publicação em produção com alerta e confirmação, e a lista do que conferir antes de abrir para o público.
 
 ### Como instalar
 
@@ -65,7 +66,7 @@ Converse com o Claude, sem decorar comando:
 ```
 .claude-plugin/marketplace.json           catálogo (o "marketplace" fabricadeasas)
 plugins/fabrica-de-asas/rules/            as preferências, em arquivos curtos por assunto
-plugins/fabrica-de-asas/skills/           versionamento-*, publicar com segurança, controle das preferências
+plugins/fabrica-de-asas/skills/           versionamento-*, controle das preferências
 plugins/fabrica-de-asas/hooks/hooks.json  gatilhos: início de conversa e trava do git
 plugins/fabrica-de-asas/scripts/          o que os gatilhos executam
 ```

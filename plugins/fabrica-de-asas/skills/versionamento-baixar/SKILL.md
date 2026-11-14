@@ -13,5 +13,6 @@ Para a pessoa: "baixei o projeto do GitHub para este computador, com todas as ve
 3. Combine onde guardar. Sugira uma pasta de projetos fora de pastas sincronizadas (Dropbox, OneDrive, iCloud, Google Drive): elas copiam os arquivos internos das versões pela metade e podem estragar o histórico.
 4. Se já existe uma pasta com esse projeto neste computador, não baixe por cima: siga a skill `fabrica-de-asas:versionamento-sincronizar` nela.
 5. `gh repo clone <dono>/<projeto> "<pasta>"`.
-6. Olhe o projeto baixado e avise o que não vem junto: senhas e chaves (`.env`) nunca ficam no GitHub. Se houver um `.env.example` ou instruções no README, ofereça montar o `.env` com ela.
-7. Conte em uma linha onde o projeto ficou.
+6. Entre na linha de trabalho: `git switch dev` (ou `develop`, se for a que o projeto usa). Se não existir, crie como diz a skill `fabrica-de-asas:versionamento-sincronizar`.
+7. Olhe o projeto baixado e avise o que não vem junto: senhas e chaves (`.env`) nunca ficam no GitHub. Se houver um `.env.example` ou instruções no README, ofereça montar o `.env` com ela.
+8. Conte em uma linha onde o projeto ficou.

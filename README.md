@@ -1,143 +1,127 @@
-# Claude Code for everyone
+# Claude Code para todos
 
-**English** · [Português (Brasil)](README.pt-BR.md)
+O Claude Code vem configurado de fábrica para conversar com programadores. Ele responde em jargão e parte do princípio de que você sabe o que pedir: teste automatizado, controle de acesso, proteção contra injeção de SQL, backup antes de mexer no banco.
 
-Out of the box, Claude Code is set up to talk to programmers. It answers in jargon and assumes you know what to ask for: automated tests, access control, SQL injection protection, a backup before touching the database.
+Quem não programa não sabe que essas coisas existem, então nunca pede. Este pacote resolve os dois lados do problema com dois arquivos de texto:
 
-People who don't program don't know these things exist, so they never ask for them. This package solves both sides of the problem with two text files:
+- **Estilo de comunicação** (`linguagem-simples.md`): o Claude passa a explicar em linguagem do dia a dia, sem jargão, dizendo o que mudou na prática e não que código mudou.
+- **Diretrizes** (`CLAUDE.md`): o Claude passa a seguir as boas práticas de engenharia sozinho, sem que você peça, como um engenheiro de software faria. Ele vira a sua equipe de desenvolvimento, e você é o chefe.
 
-- **Communication style** (`plain-language.md`): Claude explains things in everyday language, without jargon, telling you what changed in practice rather than what code changed.
-- **Guidelines** (`CLAUDE.md`): Claude follows good engineering practices on its own, without you asking, the way a software engineer would. It becomes your development team, and you're the boss.
+## Para quem é
 
-## Who it's for
+Para quem usa o Claude Code para construir ou manter um sistema sem ser da área: dono de negócio, analista, profissional de outra área que aprendeu a pedir as coisas para a IA. Se você é programador, também funciona, mas as diretrizes foram escritas pensando em quem não sabe o que cobrar.
 
-For anyone who uses Claude Code to build or maintain a system without being from the field: business owners, analysts, professionals from other areas who learned to ask AI for things. If you're a programmer, it works too, but the guidelines were written with people who don't know what to demand in mind.
+## Jeito mais fácil: o plugin
 
-## Easiest way: the plugin
+O plugin `fabrica-de-asas` instala tudo sozinho e mantém atualizado. Você não copia nem edita arquivo nenhum.
 
-The `fabrica-de-asas` plugin installs everything on its own and keeps it up to date. You don't copy or edit any file.
+Por enquanto, o plugin existe só em português.
 
-For now, the plugin exists only in Portuguese.
-
-| What it brings | In practice |
+| O que ele traz | Na prática |
 | --- | --- |
-| **Preferences that update themselves** | The guidelines and the way of talking arrive and get refreshed without you touching anything |
-| **Versions without jargon** | Claude saves your project's versions and sends the copy to GitHub on its own. You only hear the word "version". You can also ask directly: `/fabrica-de-asas:versionamento-salvar`, `-sincronizar`, `-baixar` and `-fundir` |
-| **Safety lock** | Commands that would delete versions or send passwords to the cloud are blocked before they run |
-| **You in control** | Change a preference, turn them all off, or choose whether updates arrive on their own, with a question, or only when you ask |
+| **Preferências que se atualizam** | As diretrizes e o jeito de falar chegam e se renovam sem você mexer em nada |
+| **Versões sem jargão** | O Claude salva as versões do seu projeto e manda a cópia para o GitHub sozinho. Você só ouve falar em "versão". Também dá para pedir direto: `/fabrica-de-asas:versionamento-salvar`, `-sincronizar`, `-baixar` e `-fundir` |
+| **Trava de segurança** | Comandos que apagariam versões ou mandariam senhas para a nuvem são bloqueados antes de rodar |
+| **Você no controle** | Mude uma preferência, desligue todas, ou escolha se as atualizações chegam sozinhas, com pergunta, ou só quando você pedir |
 
-Putting a website or system online? The `fabrica-de-asas-no-ar` add-on (from the publishing course) adds a test environment, publishing to production with a warning and confirmation, and the list of what to check before opening to the public.
+Vai colocar um site ou sistema no ar? O complemento `fabrica-de-asas-no-ar` (do curso de publicação) acrescenta um ambiente de testes, a publicação em produção com alerta e confirmação, e a lista do que conferir antes de abrir para o público.
 
-### How to install
+### Como instalar
 
-In Claude Code, type:
+No Claude Code, digite:
 
 ```
 /plugin install fabrica-de-asas --marketplace fabricadeasas/claude-code-for-everyone
 ```
 
-It needs Claude Code 2.1.275 or newer. In earlier versions, it takes two commands:
+Precisa do Claude Code 2.1.275 ou mais novo. Em versões anteriores, são dois comandos:
 
 ```
 /plugin marketplace add fabricadeasas/claude-code-for-everyone
 /plugin install fabrica-de-asas@fabricadeasas
 ```
 
-You can also ask Claude itself: "Install the fabrica-de-asas plugin from the fabricadeasas/claude-code-for-everyone marketplace and turn on its automatic updates."
+Também dá para pedir para o próprio Claude: "Instale o plugin fabrica-de-asas do marketplace fabricadeasas/claude-code-for-everyone e ligue a atualização automática dele."
 
-The preferences take effect **from the second conversation on**: in the first one, the plugin only puts them in place.
+As preferências passam a valer **a partir da segunda conversa**: na primeira, o plugin só as coloca no lugar.
 
-Requirement: Git installed. On Windows, the plugin uses Git Bash, which comes with Git.
+Requisito: Git instalado. No Windows, o plugin usa o Git Bash, que vem junto com o Git.
 
-### Automatic updates
+### Atualização automática
 
-Claude Code ships with automatic updates turned off for plugins that aren't from Anthropic. To get new versions on their own, turn it on once: ask Claude "turn on automatic updates for the Fábrica de Asas plugin", or use `/plugin` → Marketplaces → fabricadeasas → Enable auto-update.
+O Claude Code vem com a atualização automática desligada para plugins que não são da Anthropic. Para receber as novidades sozinho, ligue uma vez: peça ao Claude "ligue a atualização automática do plugin da Fábrica de Asas", ou use `/plugin` → Marketplaces → fabricadeasas → Enable auto-update.
 
-### Adjust or turn off
+### Ajustar ou desligar
 
-Talk to Claude, no commands to memorize:
+Converse com o Claude, sem decorar comando:
 
-- "I want to change a Fábrica de Asas preference": it writes the change to your `CLAUDE.md`, which always takes priority over the plugin's default.
-- "Turn off the Fábrica de Asas preferences": only yours apply from then on.
-- "Ask me before updating the preferences" or "only update when I ask".
+- "Quero mudar uma preferência da Fábrica de Asas": ele grava a mudança no seu `CLAUDE.md`, que sempre vale mais que o padrão do plugin.
+- "Desliga as preferências da Fábrica de Asas": passam a valer só as suas.
+- "Me pergunta antes de atualizar as preferências" ou "só atualiza quando eu pedir".
 
-### How it works inside
-
-```
-.claude-plugin/marketplace.json           catalog (the "fabricadeasas" marketplace)
-plugins/fabrica-de-asas/rules/            the preferences, in short files by topic
-plugins/fabrica-de-asas/skills/           versionamento-*, preference controls
-plugins/fabrica-de-asas/hooks/hooks.json  triggers: conversation start and git lock
-plugins/fabrica-de-asas/scripts/          what the triggers run
-```
-
-At the start of each conversation, the plugin copies the preferences to `~/.claude/rules/fabrica-de-asas/`, a folder Claude Code reads on its own and with no size limit. Your choices (on or off, update mode) are kept in the plugin's data folder, which survives updates.
-
-## Manual installation (no plugin)
+### Como funciona por dentro
 
 ```
-pt-BR/CLAUDE.md               engineering guidelines (Portuguese)
-pt-BR/linguagem-simples.md    communication style (Portuguese)
-en/CLAUDE.md                  engineering guidelines (English)
-en/plain-language.md          communication style (English)
+.claude-plugin/marketplace.json           catálogo (o "marketplace" fabricadeasas)
+plugins/fabrica-de-asas/rules/            as preferências, em arquivos curtos por assunto
+plugins/fabrica-de-asas/skills/           versionamento-*, controle das preferências
+plugins/fabrica-de-asas/hooks/hooks.json  gatilhos: início de conversa e trava do git
+plugins/fabrica-de-asas/scripts/          o que os gatilhos executam
 ```
 
-Pick the folder for your language. The content is the same in both; only the language changes. With the manual way, updates don't arrive on their own.
+No começo de cada conversa, o plugin copia as preferências para `~/.claude/rules/fabrica-de-asas/`, pasta que o Claude Code lê sozinho e sem limite de tamanho. As suas escolhas (ligado ou desligado, modo de atualização) ficam guardadas na pasta de dados do plugin, que sobrevive às atualizações.
 
-Both files go into your personal Claude folder, so they apply to all your projects. `~` is your user folder:
+## Instalação manual (sem plugin)
 
-| System | Folder |
+```
+pt-BR/CLAUDE.md               diretrizes de engenharia
+pt-BR/linguagem-simples.md    estilo de comunicação
+```
+
+Do jeito manual, as atualizações não chegam sozinhas.
+
+Os dois arquivos vão para a sua pasta pessoal do Claude, e por isso valem para todos os seus projetos. `~` é a sua pasta de usuário:
+
+| Sistema | Pasta |
 | --- | --- |
-| Windows | `C:\Users\your-name\.claude\` |
-| Mac | `/Users/your-name/.claude/` |
-| Linux | `/home/your-name/.claude/` |
+| Windows | `C:\Users\seu-nome\.claude\` |
+| Mac | `/Users/seu-nome/.claude/` |
+| Linux | `/home/seu-nome/.claude/` |
 
-If the `.claude` folder doesn't exist, create it.
+Se a pasta `.claude` não existir, crie.
 
-### 1. Communication style
+### 1. Estilo de comunicação
 
-Copy `plain-language.md` to `~/.claude/output-styles/` (create the folder if needed). Then open `~/.claude/settings.json` and point to the style by the name in the file's `name` field:
+Copie `linguagem-simples.md` para `~/.claude/output-styles/` (crie a pasta se precisar). Depois abra `~/.claude/settings.json` e aponte para o estilo pelo nome que está no campo `name` do arquivo:
 
 ```json
 {
-  "outputStyle": "Plain language"
+  "outputStyle": "Linguagem simples"
 }
 ```
 
-It takes effect from the next session (or after `/clear`).
+Vale a partir da próxima sessão (ou depois de `/clear`).
 
-### 2. Guidelines
+### 2. Diretrizes
 
-Copy `CLAUDE.md` to `~/.claude/CLAUDE.md`. If you already have a `CLAUDE.md` there, add the content to what's already there instead of replacing it.
+Copie `CLAUDE.md` para `~/.claude/CLAUDE.md`. Se você já tem um `CLAUDE.md` ali, acrescente o conteúdo ao que já existe em vez de substituir.
 
-## The trap almost everyone falls into
+## A armadilha que quase todo mundo cai
 
-By default, a custom output style wipes out Claude Code's software engineering instructions (reviewing its own work, keeping the scope of a change in check, verifying what it did). In other words: it starts talking nicely and coding worse.
+Por padrão, um estilo de resposta customizado apaga as instruções de engenharia de software do Claude Code (revisar o próprio trabalho, cuidar do escopo da mudança, verificar o que fez). Ou seja: ele passa a falar bonito e a programar pior.
 
-The `keep-coding-instructions: true` line in the style's header is what prevents this. It keeps the technical competence intact and changes only the way it talks. If you adapt the file, don't remove that line.
+A linha `keep-coding-instructions: true` no cabeçalho do estilo é o que evita isso. Ela mantém a competência técnica intacta e muda só o jeito de falar. Se você adaptar o arquivo, não tire essa linha.
 
-## What this doesn't guarantee
+## O que isto não garante
 
-This is guidance, not a lock. It greatly increases the chance that the standard shows up, but it isn't a deterministic guarantee: in a very long conversation, or after a context compaction, some rule may slip. For what truly needs to be guaranteed, there are Claude Code hooks, which run outside the model.
+Isto é orientação, não trava. Aumenta muito a chance de o padrão aparecer, mas não é garantia determinística: em conversa muito longa, ou depois de uma compactação de contexto, alguma regra pode escapar. Para o que precisa ser garantido de verdade, existem os hooks do Claude Code, que rodam fora do modelo.
 
-And the most important warning: this raises the floor, it doesn't replace you. Having the files is no reason to stop asking questions or to accept everything without reading. If you didn't understand a decision, ask for it to be explained again.
+E o aviso mais importante: isto eleva o piso, não substitui você. Ter os arquivos não é motivo para parar de perguntar ou aceitar tudo sem ler. Se não entendeu uma decisão, peça para explicarem de novo.
 
-## Living documents
+## Documentos vivos
 
-These files will keep being adjusted as practice shows what works: rules Claude ignores come out, missing rules go in, confusing wording gets rewritten. Follow the repository to get the new versions. If you adapted the text for your case, keep your changes separate, so it's easy to reapply them on top of the new version.
+Estes arquivos vão continuar sendo ajustados conforme a prática mostrar o que funciona: regra que o Claude ignora sai, regra que faltava entra, redação confusa é reescrita. Acompanhe o repositório para receber as versões novas. Se você adaptou o texto para o seu caso, guarde as suas mudanças separadas, assim fica fácil reaplicá-las por cima da versão nova.
 
-## Languages
+## Sobre
 
-Portuguese is the source. English is generated from it automatically, and a checker in CI makes sure the two never drift apart: if a Portuguese file changes, the build breaks until the translation is regenerated; if someone edits the translation by hand, the build breaks too.
-
-To contribute, edit only the files in `pt-BR/` (or `README.pt-BR.md`) and run:
-
-```bash
-npm run translate
-```
-
-The command uses the Claude Code on your machine (`claude -p`, you need to be logged in) to translate, checks block by block that the translation has the same structure as the original, and updates `translations.lock.json`. To check without generating anything, `npm run check`.
-
-## About
-
-Created by [Guilherme Almeida Girardi](https://github.com/ggirardi1) as part of the Superpoderes com IA course, from [Fábrica de Asas](https://fabricadeasas.com.br). MIT License.
+Criado por [Guilherme Almeida Girardi](https://github.com/ggirardi1) como parte do curso Superpoderes com IA, da [Fábrica de Asas](https://fabricadeasas.com.br). Licença MIT.

@@ -1,6 +1,6 @@
 ---
 name: versionamento-sincronizar
-description: Sincroniza as versões do projeto com o GitHub para quem não é programador, sem jargão: primeiro traz as novidades da nuvem (git pull) e depois manda as versões novas (git push), se houver. Use no começo de cada conversa num projeto que tem cópia no GitHub, logo depois de salvar uma versão, quando o projeto ainda não tem cópia na nuvem (criar o repositório), quando um pull ou push der erro, ou quando a pessoa disser "manda para o GitHub", "atualiza", "traz o que fiz no outro computador" ou usar as palavras pull, push ou sync.
+description: Sincroniza as versões do projeto com o GitHub para quem não é programador, sem jargão. Primeiro traz as novidades da nuvem (git pull) e depois manda as versões novas (git push), se houver. Use no começo de cada conversa num projeto que tem cópia no GitHub, logo depois de salvar uma versão, quando o projeto ainda não tem cópia na nuvem (criar o repositório), quando um pull ou push der erro, ou quando a pessoa disser "manda para o GitHub", "atualiza", "traz o que fiz no outro computador" ou usar as palavras pull, push ou sync.
 ---
 
 # Sincronizar com a nuvem

@@ -1,5 +1,5 @@
 {
-  "description": "Keeps the Fábrica de Asas rules in ~/.claude/rules/fabrica-de-asas/ in sync and blocks git commands that destroy saved versions or upload secrets.",
+  "description": "Mantém as preferências da Fábrica de Asas em ~/.claude/rules/fabrica-de-asas/ atualizadas e bloqueia comandos do git que apagam versões guardadas ou mandam senhas para a nuvem.",
   "hooks": {
     "SessionStart": [
       {

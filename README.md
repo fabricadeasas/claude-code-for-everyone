@@ -67,7 +67,10 @@ plugins/fabrica-de-asas/rules/            as preferências, em arquivos curtos p
 plugins/fabrica-de-asas/skills/           versionamento-*, controle das preferências
 plugins/fabrica-de-asas/hooks/hooks.json  gatilhos: início de conversa e trava do git
 plugins/fabrica-de-asas/scripts/          o que os gatilhos executam
+plugins/fabrica-de-asas/tests/            testes da trava do git (bash plugins/fabrica-de-asas/tests/guard-git.test.sh)
 ```
+
+A trava do git olha o projeto que cada comando realmente mexe (`git -C`, `cd` e `Set-Location` antes do comando), não a pasta da conversa. Texto dentro de aspas ou que só vai para um arquivo (heredoc) não conta como comando.
 
 No começo de cada conversa, o plugin copia as preferências para `~/.claude/rules/fabrica-de-asas/`, pasta que o Claude Code lê sozinho e sem limite de tamanho. As suas escolhas (ligado ou desligado, modo de atualização) ficam guardadas na pasta de dados do plugin, que sobrevive às atualizações.
 

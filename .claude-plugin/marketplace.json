@@ -11,12 +11,14 @@
   "plugins": [
     {
       "name": "fabrica-de-asas",
+      "displayName": "Claude Code for Everyone - Fábrica de Asas",
       "source": "./plugins/fabrica-de-asas",
       "description": "Preferências do curso Superpoderes com IA: linguagem simples, boas práticas de engenharia e versões guardadas sem jargão.",
       "category": "productivity"
     },
     {
       "name": "fabrica-de-asas-no-ar",
+      "displayName": "Claude Code Go Live - Fábrica de Asas",
       "source": {
         "source": "github",
         "repo": "fabricadeasas/claude-code-go-live"

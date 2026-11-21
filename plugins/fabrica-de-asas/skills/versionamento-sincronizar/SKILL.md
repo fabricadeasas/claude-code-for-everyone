@@ -17,8 +17,9 @@ Para a pessoa: "trouxe as novidades da nuvem" (pull) e "mandei a cópia para o G
 4. Conte em uma linha o que aconteceu, sem colar a saída do git.
 
 ## Exceção: quando mandar para a nuvem coloca no ar
-Alguns projetos publicam sozinhos quando recebem uma versão nova (automação no GitHub, Vercel, Netlify, servidor que puxa da nuvem). Confira antes do primeiro envio: pasta `.github/workflows`, arquivos `vercel.json` ou `netlify.toml`, instruções de publicação no projeto. Se for o caso:
-- **Pergunte antes de mandar**: "Mandar para a nuvem vai colocar esta mudança no ar para todo mundo. Posso mandar?"
+Alguns projetos publicam sozinhos quando a linha principal recebe uma versão nova (automação no GitHub, Vercel, Netlify, servidor que puxa da nuvem). Confira antes do primeiro envio: pasta `.github/workflows`, arquivos `vercel.json` ou `netlify.toml`, instruções de publicação no projeto. Se for o caso, não pergunte nada; siga o que a pessoa pediu:
+- **Ela pediu para publicar** ("publica", "coloca no ar"): o pedido é o ok. Mande, acompanhe a publicação e confira no site que a mudança está lá.
+- **Ela pediu só para salvar, ou você está salvando sozinho**: não coloque no ar. Guarde num rascunho: `git switch -c <assunto>` (as versões e mudanças vêm junto) e `git push -u origin <assunto>`. Conte: "Guardei no GitHub num rascunho, sem colocar no ar. Quando quiser, é só pedir para publicar." Continue trabalhando nesse rascunho até ela pedir para publicar; aí junte na linha principal (skill `fabrica-de-asas:versionamento-fundir`) e mande.
 
 ## Sem cópia na nuvem
 1. Ofereça em uma frase: "Quer guardar uma cópia privada das versões no seu GitHub? Se o computador der problema, nada se perde."

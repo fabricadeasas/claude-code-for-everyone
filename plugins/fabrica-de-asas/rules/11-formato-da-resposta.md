@@ -55,7 +55,8 @@ instalar, mover para a pasta final, reiniciar o serviço, aplicar a migration no
 local), registrar no agendador/cron, recarregar a configuração.
 
 ### O que conta como "fazer valer" (publicar)
-- **Servidor / aplicação**: push que dispara deploy, script/pipeline de deploy, ou alteração feita direto lá.
+- **Servidor / aplicação**: deploy **concluído e conferido no servidor** (a publicação terminou, a versão
+  nova está rodando lá, a mudança foi vista funcionando lá). Push que só *dispara* o deploy ainda é ☑️.
 - **Banco de dados**: migration, DDL ou DML aplicado no banco que o sistema realmente usa — remoto ou local.
 - **Repositório remoto**: quando o entregável é o próprio commit/PR/tag/release. Commit sem push é ☑️.
 - **Serviços externos / SaaS**: painel, DNS, storage/bucket, filas, cron/agendamentos, secrets e variáveis
@@ -73,7 +74,8 @@ local), registrar no agendador/cron, recarregar a configuração.
   nomeando onde está.
 - Sempre deixe claro **onde** a entrega está: local, homolog ou produção.
 - Publicar é ação com consequência: só publico com autorização minha (ver "Ações destrutivas").
-  Ficar em ☑️ esperando meu ok é o comportamento certo, não uma falha.
+  Ficar em ☑️ esperando meu ok é o comportamento certo, não uma falha. O meu pedido de publicar
+  ("publica", "coloca no ar") **é** essa autorização, para o caminho inteiro até o destino.
 
 ### DETALHAMENTO não usa ✅ nem ☑️
 - Ali as linhas são **constatações/evidências**, não tarefas concluídas. ✅/☑️ ali me passam sensação

@@ -10,14 +10,20 @@
 - Guardar as versões é tarefa sua, não dela. Não peça para ela "fazer commit/push": você salva sozinho.
 - No começo de cada conversa num projeto com cópia no GitHub, traga as novidades antes de mexer em qualquer coisa.
 - Para voltar atrás, prefira sempre o caminho que não apaga nada (uma versão nova que desfaz a antiga, `git revert`). O plugin bloqueia os comandos que apagam trabalho ou versões.
-- Trabalhe na linha principal. Só crie um rascunho (branch) se o projeto já trabalha assim ou se a pessoa quiser revisar antes de algo ir ao ar.
+- Trabalhe na linha principal. Só crie um rascunho (branch) se o projeto já trabalha assim, se a pessoa quiser revisar antes de algo ir ao ar, ou se mandar a linha principal para a nuvem coloca no ar sozinho (veja a skill de sincronizar).
+
+## Salvar e publicar: um pedido, o caminho inteiro
+- **Salvar** ("salva", "guarda", "salva para eu ver depois") é um passo só: a versão e a cópia no GitHub, sem perguntar nada no meio. Salvar nunca coloca nada no ar.
+- **Publicar** ("publica", "coloca no ar", "sobe") é a autorização para todas as etapas até estar no ar e conferido: salvar, juntar o rascunho, mandar, acompanhar a publicação e conferir no site. Não pare para perguntar "posso salvar?", "posso juntar?", "posso mandar?", e não fale em commit, push ou merge.
+- Pare no meio só quando algo impedir de verdade: teste falhando, conflito que pede uma decisão dela, login expirado, ou uma ação destrutiva que não estava no pedido (por exemplo, apagar dados). Diga em que ponto parou e por quê.
+- Nada de ponta solta: se algo ficou salvo num rascunho e ainda não foi publicado, diga isso no fim da resposta, em uma linha.
 
 ## Skills de versionamento
 Use a skill certa sempre que for fazer uma destas operações:
 
 | Operação | Skill |
 | --- | --- |
-| Salvar uma versão (commit), inclusive a primeira | `fabrica-de-asas:versionamento-salvar` |
+| Salvar uma versão e guardar a cópia no GitHub (commit e push), inclusive a primeira | `fabrica-de-asas:versionamento-salvar` |
 | Trazer as novidades e mandar as versões para o GitHub (pull e push), criar a cópia na nuvem | `fabrica-de-asas:versionamento-sincronizar` |
 | Baixar um projeto do GitHub para este computador (clone) | `fabrica-de-asas:versionamento-baixar` |
 | Juntar um rascunho na linha principal ou resolver conflito (merge) | `fabrica-de-asas:versionamento-fundir` |

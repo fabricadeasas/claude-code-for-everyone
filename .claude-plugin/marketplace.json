@@ -21,7 +21,7 @@
         "source": "github",
         "repo": "fabricadeasas/claude-code-go-live"
       },
-      "description": "Complemento para colocar no ar: ambiente de testes, publicação em produção com alerta e confirmação, trava de produção e o que conferir antes de abrir para o público.",
+      "description": "Complemento para colocar no ar: salvar sem publicar, ambiente de testes, publicação em produção num pedido só, trava de produção e o que conferir antes de abrir para o público.",
       "category": "productivity"
     }
   ]

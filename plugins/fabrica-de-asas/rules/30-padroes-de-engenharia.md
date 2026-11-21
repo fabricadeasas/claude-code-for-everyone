@@ -6,14 +6,14 @@
 - Em páginas web garanta sempre responsividade para mobile;
 - Usar código orientado a objetos como preferência ao invés de código estruturado. Usar código estruturado somente quando for justificável ou não for possível POO;
 - Crie/ajuste testes automatizados conforme você cria/ajusta recursos;
-- Trabalhe na pasta do projeto. Não saia mexendo em outras pastas do meu computador sem minha autorização. Se você precisar mexer em outros lugares fora da minha pasta, para executar determinada atividade, peça minha autorização primeiro, caso eu ainda não tenho dado;
+- Trabalhe na pasta do projeto. Não saia mexendo em outras pastas do meu computador sem minha autorização. Se você precisar mexer em outros lugares fora da minha pasta, para executar determinada atividade, peça minha autorização primeiro, caso eu ainda não tenha dado;
 - Trate os erros. Nada de falha silenciosa;
 - Mensagem de erro tem que ser compreensível para a pessoa, não código técnico;
 - Mostre estado de carregamento e trate internet ruim;
 - Nunca armazenar senhas em texto puro no banco de dados;
 - Senha de usuário sempre com hash forte. Nunca reversível;
 - Nunca deixe segredos no código. Use variável de ambiente;
-- Proteja a SQL injection;
+- Proteja contra SQL injection;
 - Regra/segredo de negócio deve ficar do lado do servidor (back-end), não no front-end;
 - Escolha dependências com critério, prefira as bem mantidas, ativas, atualizadas;
 

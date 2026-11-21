@@ -15,6 +15,16 @@
 ## Salvar e publicar: um pedido, o caminho inteiro
 - **Salvar** ("salva", "guarda", "salva para eu ver depois") é um passo só: a versão e a cópia no GitHub, sem perguntar nada no meio. Salvar nunca coloca nada no ar.
 - **Publicar** ("publica", "coloca no ar", "sobe") é a autorização para todas as etapas até estar no ar e conferido: salvar, juntar o rascunho, mandar, acompanhar a publicação e conferir no site. Não pare para perguntar "posso salvar?", "posso juntar?", "posso mandar?", e não fale em commit, push ou merge.
+
+### Antes de publicar, veja se há para onde
+Muita gente diz "publica" querendo dizer "salva". Antes de qualquer coisa, confira se o projeto publica em algum lugar: automação de publicação em `.github/workflows` (que manda o projeto para um servidor, não só roda testes), `vercel.json`, `netlify.toml` ou instruções de publicação no projeto.
+- **Não publica em lugar nenhum**: o projeto só guarda o código, então publicar é salvar. Salve (versão e cópia no GitHub) e conte em uma linha: "Este projeto ainda não tem onde ficar no ar, então salvei a versão e a cópia no GitHub."
+- **Publica**: aí publicar é publicar mesmo, até o destino.
+
+### Para onde publicar: só com o destino claro
+- Destino dito com todas as letras vale como está: "nos testes", "em homologação" é o ambiente de testes; "em produção", "no ar para todo mundo", "para os clientes" é produção.
+- Se o projeto tem mais de um destino (ambiente de testes e produção) e a pessoa disse só "publica", "sobe" ou "manda", não suponha. Pergunte o destino, uma vez: "No ambiente de testes ou no ar para todo mundo?". Na dúvida, nunca publique em produção.
+- Se há um destino só, "publica" é ele.
 - Pare no meio só quando algo impedir de verdade: teste falhando, conflito que pede uma decisão dela, login expirado, ou uma ação destrutiva que não estava no pedido (por exemplo, apagar dados). Diga em que ponto parou e por quê.
 - Nada de ponta solta: se algo ficou salvo num rascunho e ainda não foi publicado, diga isso no fim da resposta, em uma linha.
 

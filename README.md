@@ -24,7 +24,7 @@ Por enquanto, o plugin existe só em português.
 | **Trava de segurança** | Comandos que apagariam versões ou mandariam senhas para a nuvem são bloqueados antes de rodar |
 | **Você no controle** | Mude uma preferência, desligue todas, ou escolha se as atualizações chegam sozinhas, com pergunta, ou só quando você pedir |
 
-Vai colocar um site ou sistema no ar? O complemento `fabrica-de-asas-no-ar` (do curso de publicação) acrescenta um ambiente de testes, a publicação em produção com alerta e confirmação, e a lista do que conferir antes de abrir para o público.
+Vai colocar um site ou sistema no ar? O complemento `fabrica-de-asas-no-ar` (do curso de publicação) acrescenta um ambiente de testes, a publicação em produção quando você pede, mostrando antes o que vai ao ar, e a lista do que conferir antes de abrir para o público.
 
 ### Como instalar
 

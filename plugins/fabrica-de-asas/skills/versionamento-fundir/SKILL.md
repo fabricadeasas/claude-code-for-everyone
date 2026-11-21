@@ -14,8 +14,8 @@ Com a pessoa: um branch é um "rascunho", e fundir é "juntar o rascunho na linh
 ## Juntar um rascunho na linha principal
 - Se o projeto usa pull requests (a linha principal é protegida no GitHub ou o time revisa antes): `gh pr create` e `gh pr merge`.
 - Se não: `git switch <principal>` e `git merge <rascunho>`.
-- Se juntar na principal coloca no ar (veja a exceção na skill de sincronizar), pergunte antes.
-- Depois de juntar e mandar para a nuvem, ofereça apagar o rascunho com `git branch -d <rascunho>`. O `-d` minúsculo só apaga o que já foi juntado; nunca use `-D`.
+- Se juntar na principal coloca no ar (veja a exceção na skill de sincronizar): junte quando a pessoa pediu para publicar, sem perguntar de novo, porque o pedido já é a autorização. Sem esse pedido, deixe o rascunho (ou o pedido de junção) esperando e coloque em PENDÊNCIAS, com o link quando houver.
+- Depois de juntar e mandar para a nuvem, apague o rascunho deste computador com `git branch -d <rascunho>`. O `-d` minúsculo só apaga o que já foi juntado; nunca use `-D`.
 
 ## Quando dá conflito
 1. Veja quais arquivos têm conflito: `git status`.

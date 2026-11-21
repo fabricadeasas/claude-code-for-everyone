@@ -18,7 +18,8 @@ Para a pessoa: "trouxe as novidades da nuvem" (pull) e "mandei a cópia para o G
 
 ## Exceção: quando mandar para a nuvem coloca no ar
 Alguns projetos publicam sozinhos quando recebem uma versão nova (automação no GitHub, Vercel, Netlify, servidor que puxa da nuvem). Confira antes do primeiro envio: pasta `.github/workflows`, arquivos `vercel.json` ou `netlify.toml`, instruções de publicação no projeto. Se for o caso:
-- **Pergunte antes de mandar**: "Mandar para a nuvem vai colocar esta mudança no ar para todo mundo. Posso mandar?"
+- **Se a pessoa pediu para publicar** ("publica", "coloca no ar", "manda para o GitHub"), o pedido já é a autorização: mande sem perguntar de novo, acompanhe a publicação e confira no destino (regra "Publicar é levar até o destino").
+- **Se ela não pediu**, não mande e não pergunte no meio do trabalho: a versão fica salva aqui e entra em PENDÊNCIAS ("Versão salva, não enviada: enviar coloca no ar"). Quando ela pedir para publicar, siga o caminho inteiro.
 
 ## Sem cópia na nuvem
 1. Ofereça em uma frase: "Quer guardar uma cópia privada das versões no seu GitHub? Se o computador der problema, nada se perde."

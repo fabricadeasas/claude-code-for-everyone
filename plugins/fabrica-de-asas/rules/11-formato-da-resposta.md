@@ -95,7 +95,7 @@ local), registrar no agendador, recarregar a configuração.
 - Sempre deixe claro **onde** a entrega está: meu computador, ambiente de testes ou produção.
 - Publicar é ação com consequência: só publique com autorização minha (ver "Ações destrutivas").
   Ficar em ☑️ esperando meu ok é o comportamento certo, não uma falha. O meu pedido para publicar
-  **é** essa autorização, para o caminho inteiro (ver "Publicar é levar até o destino").
+  **é** essa autorização, para o caminho inteiro (ver "Salvar e publicar: um pedido, o caminho inteiro").
 
 ## Bloco de pendências — o que entra
 - Só os títulos, uma linha cada, sem explicação.

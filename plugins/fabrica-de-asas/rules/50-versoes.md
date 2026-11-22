@@ -10,13 +10,22 @@
 - Guardar as versões é tarefa sua, não dela. Não peça para ela "fazer commit/push": você salva sozinho.
 - No começo de cada conversa num projeto com cópia no GitHub, traga as novidades antes de mexer em qualquer coisa.
 - Para voltar atrás, prefira sempre o caminho que não apaga nada (uma versão nova que desfaz a antiga, `git revert`). O plugin bloqueia os comandos que apagam trabalho ou versões.
-- Trabalhe na linha principal. Só crie um rascunho (branch) se o projeto já trabalha assim ou se a pessoa quiser revisar antes de algo ir ao ar.
+- Trabalhe na linha principal. Só crie um rascunho (branch) se o projeto já trabalha assim, se a pessoa quiser revisar antes de algo ir ao ar, ou se mandar a linha principal para a nuvem coloca no ar sozinho (veja a skill de sincronizar).
 
-## Publicar é levar até o destino
-- Quando eu peço para publicar ou mandar ("publica", "manda para o GitHub", "coloca no ar", "sobe isso"), estou autorizando **todas as etapas até lá** de uma vez: salvar a versão, mandar para o GitHub, juntar o rascunho, esperar a publicação automática (se o projeto tiver uma) e conferir no destino. Não pare para perguntar "posso mandar?", "posso juntar?".
-  - Pedido sem destino: vale o destino de sempre daquele projeto. Se não der para saber, pergunte só o destino, uma vez, nunca etapa por etapa.
-- Só pare no meio quando algo impedir de verdade: teste falhando, conflito que pede decisão minha, login expirado, ou uma ação destrutiva que não estava no pedido (apagar dados). Aí diga em que etapa parou e por quê.
-- **Sem pedido de publicar**, salvar e mandar as versões para o GitHub continua sendo tarefa sua, sem perguntar. A exceção é o projeto que vai ao ar sozinho quando recebe uma versão no GitHub: aí a versão fica salva aqui, esperando, e entra em PENDÊNCIAS até eu pedir para publicar.
+## Salvar e publicar: um pedido, o caminho inteiro
+- **Salvar** ("salva", "guarda", "salva para eu ver depois") é um passo só: a versão e a cópia no GitHub, sem perguntar nada no meio. Salvar nunca coloca nada no ar: se o projeto vai ao ar sozinho quando a linha principal recebe uma versão, a cópia vai num rascunho (veja a skill de sincronizar).
+- **Publicar** ("publica", "coloca no ar", "sobe") é a autorização para todas as etapas até estar no ar e conferido: salvar, juntar o rascunho, mandar, acompanhar a publicação e conferir no site. Não pare para perguntar "posso salvar?", "posso juntar?", "posso mandar?", e não fale em commit, push ou merge.
+
+### Antes de publicar, veja se há para onde
+Muita gente diz "publica" querendo dizer "salva". Antes de qualquer coisa, confira se o projeto publica em algum lugar: automação de publicação em `.github/workflows` (que manda o projeto para um servidor, não só roda testes), `vercel.json`, `netlify.toml` ou instruções de publicação no projeto.
+- **Não publica em lugar nenhum**: o projeto só guarda o código, então publicar é salvar. Salve (versão e cópia no GitHub) e conte em uma linha: "Este projeto ainda não tem onde ficar no ar, então salvei a versão e a cópia no GitHub."
+- **Publica**: aí publicar é publicar mesmo, até o destino.
+
+### Para onde publicar: só com o destino claro
+- Destino dito com todas as letras vale como está: "nos testes", "em homologação" é o ambiente de testes; "em produção", "no ar para todo mundo", "para os clientes" é produção.
+- Se o projeto tem mais de um destino (ambiente de testes e produção) e a pessoa disse só "publica", "sobe" ou "manda", não suponha. Pergunte o destino, uma vez: "No ambiente de testes ou no ar para todo mundo?". Na dúvida, nunca publique em produção.
+- Se há um destino só, "publica" é ele.
+- Pare no meio só quando algo impedir de verdade: teste falhando, conflito que pede uma decisão dela, login expirado, ou uma ação destrutiva que não estava no pedido (por exemplo, apagar dados). Diga em que ponto parou e por quê.
 - **Nada de ponta solta**: nunca encerre uma tarefa deixando versão salva e não enviada, rascunho não juntado ou pedido de junção (pull request) aberto sem que isso apareça em PENDÊNCIAS, com o link do pedido quando houver, repetido a cada resposta até resolver. Trabalho que eu não sei que ficou parado é trabalho perdido.
 - Antes de abrir um pedido de junção no GitHub, veja os meus que já estão abertos naquele projeto (`gh pr list --author @me --state open`). Se algum estiver parado há mais de 7 dias, me avise em uma linha antes de seguir.
 
@@ -25,7 +34,7 @@ Use a skill certa sempre que for fazer uma destas operações:
 
 | Operação | Skill |
 | --- | --- |
-| Salvar uma versão (commit), inclusive a primeira | `fabrica-de-asas:versionamento-salvar` |
+| Salvar uma versão e guardar a cópia no GitHub (commit e push), inclusive a primeira | `fabrica-de-asas:versionamento-salvar` |
 | Trazer as novidades e mandar as versões para o GitHub (pull e push), criar a cópia na nuvem | `fabrica-de-asas:versionamento-sincronizar` |
 | Baixar um projeto do GitHub para este computador (clone) | `fabrica-de-asas:versionamento-baixar` |
 | Juntar um rascunho na linha principal ou resolver conflito (merge) | `fabrica-de-asas:versionamento-fundir` |

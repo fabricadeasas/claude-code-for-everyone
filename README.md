@@ -20,11 +20,11 @@ Por enquanto, o plugin existe só em português.
 | O que ele traz | Na prática |
 | --- | --- |
 | **Preferências que se atualizam** | As diretrizes e o jeito de falar chegam e se renovam sem você mexer em nada |
-| **Versões sem jargão** | O Claude salva as versões do seu projeto e manda a cópia para o GitHub sozinho. Você só ouve falar em "versão". Também dá para pedir direto: `/fabrica-de-asas:versionamento-salvar`, `-sincronizar`, `-baixar` e `-fundir` |
+| **Versões sem jargão** | O Claude salva as versões do seu projeto e manda a cópia para o GitHub sozinho, num passo só. "Salva" nunca coloca nada no ar, e "publica" faz o caminho inteiro sem pedir ok a cada etapa. Você só ouve falar em "versão". Também dá para pedir direto: `/fabrica-de-asas:versionamento-salvar`, `-sincronizar`, `-baixar` e `-fundir` |
 | **Trava de segurança** | Comandos que apagariam versões ou mandariam senhas para a nuvem são bloqueados antes de rodar |
 | **Você no controle** | Mude uma preferência, desligue todas, ou escolha se as atualizações chegam sozinhas, com pergunta, ou só quando você pedir |
 
-Vai colocar um site ou sistema no ar? O complemento `fabrica-de-asas-no-ar` (do curso de publicação) acrescenta um ambiente de testes, a publicação em produção quando você pede, mostrando antes o que vai ao ar, e a lista do que conferir antes de abrir para o público.
+Vai colocar um site ou sistema no ar? O complemento `fabrica-de-asas-no-ar` (do curso de publicação) acrescenta um ambiente de testes, a publicação em produção num pedido só, mostrando antes o que vai ao ar, e a lista do que conferir antes de abrir para o público.
 
 ### Como instalar
 
@@ -67,7 +67,10 @@ plugins/fabrica-de-asas/rules/            as preferências, em arquivos curtos p
 plugins/fabrica-de-asas/skills/           versionamento-*, controle das preferências
 plugins/fabrica-de-asas/hooks/hooks.json  gatilhos: início de conversa e trava do git
 plugins/fabrica-de-asas/scripts/          o que os gatilhos executam
+plugins/fabrica-de-asas/tests/            testes da trava do git (bash plugins/fabrica-de-asas/tests/guard-git.test.sh)
 ```
+
+A trava do git olha o projeto que cada comando realmente mexe (`git -C`, `cd` e `Set-Location` antes do comando), não a pasta da conversa. Texto dentro de aspas ou que só vai para um arquivo (heredoc) não conta como comando.
 
 No começo de cada conversa, o plugin copia as preferências para `~/.claude/rules/fabrica-de-asas/`, pasta que o Claude Code lê sozinho e sem limite de tamanho. As suas escolhas (ligado ou desligado, modo de atualização) ficam guardadas na pasta de dados do plugin, que sobrevive às atualizações.
 

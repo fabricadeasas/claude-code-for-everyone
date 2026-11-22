@@ -13,7 +13,7 @@
 - Trabalhe na linha principal. Só crie um rascunho (branch) se o projeto já trabalha assim, se a pessoa quiser revisar antes de algo ir ao ar, ou se mandar a linha principal para a nuvem coloca no ar sozinho (veja a skill de sincronizar).
 
 ## Salvar e publicar: um pedido, o caminho inteiro
-- **Salvar** ("salva", "guarda", "salva para eu ver depois") é um passo só: a versão e a cópia no GitHub, sem perguntar nada no meio. Salvar nunca coloca nada no ar.
+- **Salvar** ("salva", "guarda", "salva para eu ver depois") é um passo só: a versão e a cópia no GitHub, sem perguntar nada no meio. Salvar nunca coloca nada no ar: se o projeto vai ao ar sozinho quando a linha principal recebe uma versão, a cópia vai num rascunho (veja a skill de sincronizar).
 - **Publicar** ("publica", "coloca no ar", "sobe") é a autorização para todas as etapas até estar no ar e conferido: salvar, juntar o rascunho, mandar, acompanhar a publicação e conferir no site. Não pare para perguntar "posso salvar?", "posso juntar?", "posso mandar?", e não fale em commit, push ou merge.
 
 ### Antes de publicar, veja se há para onde
@@ -26,7 +26,8 @@ Muita gente diz "publica" querendo dizer "salva". Antes de qualquer coisa, confi
 - Se o projeto tem mais de um destino (ambiente de testes e produção) e a pessoa disse só "publica", "sobe" ou "manda", não suponha. Pergunte o destino, uma vez: "No ambiente de testes ou no ar para todo mundo?". Na dúvida, nunca publique em produção.
 - Se há um destino só, "publica" é ele.
 - Pare no meio só quando algo impedir de verdade: teste falhando, conflito que pede uma decisão dela, login expirado, ou uma ação destrutiva que não estava no pedido (por exemplo, apagar dados). Diga em que ponto parou e por quê.
-- Nada de ponta solta: se algo ficou salvo num rascunho e ainda não foi publicado, diga isso no fim da resposta, em uma linha.
+- **Nada de ponta solta**: nunca encerre uma tarefa deixando versão salva e não enviada, rascunho não juntado ou pedido de junção (pull request) aberto sem que isso apareça em PENDÊNCIAS, com o link do pedido quando houver, repetido a cada resposta até resolver. Trabalho que eu não sei que ficou parado é trabalho perdido.
+- Antes de abrir um pedido de junção no GitHub, veja os meus que já estão abertos naquele projeto (`gh pr list --author @me --state open`). Se algum estiver parado há mais de 7 dias, me avise em uma linha antes de seguir.
 
 ## Skills de versionamento
 Use a skill certa sempre que for fazer uma destas operações:

@@ -31,17 +31,19 @@ Vai colocar um site ou sistema no ar? O complemento `fabrica-de-asas-no-ar` (do 
 No Claude Code, digite:
 
 ```
-/plugin install fabrica-de-asas --marketplace fabricadeasas/claude-code-for-everyone
+/plugin install fabrica-de-asas --marketplace fabricadeasas/claude-plugins
 ```
 
 Precisa do Claude Code 2.1.275 ou mais novo. Em versões anteriores, são dois comandos:
 
 ```
-/plugin marketplace add fabricadeasas/claude-code-for-everyone
+/plugin marketplace add fabricadeasas/claude-plugins
 /plugin install fabrica-de-asas@fabricadeasas
 ```
 
-Também dá para pedir para o próprio Claude: "Instale o plugin fabrica-de-asas do marketplace fabricadeasas/claude-code-for-everyone e ligue a atualização automática dele."
+Também dá para pedir para o próprio Claude: "Instale o plugin fabrica-de-asas do marketplace fabricadeasas/claude-plugins e ligue a atualização automática dele."
+
+O catálogo dos plugins da Fábrica de Asas mora no repositório [claude-plugins](https://github.com/fabricadeasas/claude-plugins). Quem instalou pelo endereço antigo (`fabricadeasas/claude-code-for-everyone`) continua recebendo as atualizações deste plugin. Para trocar para o endereço novo, peça ao Claude: "troque o catálogo da Fábrica de Asas para o endereço novo".
 
 As preferências passam a valer **a partir da segunda conversa**: na primeira, o plugin só as coloca no lugar.
 
@@ -62,7 +64,7 @@ Converse com o Claude, sem decorar comando:
 ### Como funciona por dentro
 
 ```
-.claude-plugin/marketplace.json           catálogo (o "marketplace" fabricadeasas)
+.claude-plugin/marketplace.json           catálogo antigo, mantido para quem instalou por este endereço
 plugins/fabrica-de-asas/rules/            as preferências, em arquivos curtos por assunto
 plugins/fabrica-de-asas/skills/           versionamento-*, controle das preferências
 plugins/fabrica-de-asas/hooks/hooks.json  gatilhos: início de conversa e trava do git

@@ -13,6 +13,10 @@
 - Só faça enquete multi-página quando as perguntas/páginas não têm dependência/interferência uma com as outras;
 - Se uma resposta pode mudar a realidade/invalidar as outras perguntas e respostas, então não use o artefato de enquete, faça as perguntas em texto mesmo na resposta;
 
+# Planejar antes de fazer
+- Quando eu pedir um plano ("vamos planejar", "faz um plano", "me mostra antes de fazer"), use a skill `fabrica-de-asas:planejar`: investigue, pergunte, apresente o plano e só faça depois do meu "pode fazer";
+- Não ligue o modo plano nativo (`EnterPlanMode`) por conta própria: ele pede permissão para cada ferramenta;
+
 # Não reinvente a roda
 - Sempre dê preferência por usar recursos existentes no mercado em vez de construir tudo do zero. Faça do zero quando realmente for justificável.
 

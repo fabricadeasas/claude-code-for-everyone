@@ -1,6 +1,6 @@
 ---
 name: preferencias
-description: Controla as preferências da Fábrica de Asas que o plugin instala. Use quando a pessoa quiser ver, mudar, desligar ou religar as preferências da Fábrica de Asas, escolher como recebe as atualizações (automática, perguntar antes, só quando pedir), trazer ou recusar uma atualização, ver o que mudou numa atualização, ligar a atualização automática do plugin, trocar o catálogo da Fábrica de Asas para o endereço novo ou remover o plugin. Use também quando o começo da conversa avisar que há uma atualização das preferências.
+description: Controla as preferências da Fábrica de Asas que o plugin instala. Use quando a pessoa quiser ver, mudar, desligar ou religar as preferências da Fábrica de Asas, escolher como recebe as atualizações (automática, perguntar antes, só quando pedir), trazer ou recusar uma atualização, ver o que mudou numa atualização, ligar a atualização automática do plugin ou remover o plugin. Use também quando o começo da conversa avisar que há uma atualização das preferências.
 ---
 
 # Preferências da Fábrica de Asas
@@ -58,15 +58,6 @@ As novidades da Fábrica de Asas chegam quando o próprio plugin se atualiza. Pa
 3. Confira que o arquivo continua sendo um JSON válido depois da edição.
 
 Pelo terminal do Claude Code também dá: `/plugin` → Marketplaces → fabricadeasas → Enable auto-update.
-
-## Catálogo no endereço antigo
-O catálogo da Fábrica de Asas mudou de `fabricadeasas/claude-code-for-everyone` para `fabricadeasas/claude-plugins`. O antigo continua funcionando, mas as novidades do catálogo (plugins novos) só saem no novo. Se a entrada `fabricadeasas` em `extraKnownMarketplaces` ainda aponta para `claude-code-for-everyone`, ofereça trocar, explicando que os plugins instalados continuam como estão. Com o ok, nesta ordem:
-1. Em `~/.claude/settings.json`, troque só o `repo` da entrada `fabricadeasas` para `fabricadeasas/claude-plugins`, sem mexer no resto. Confira que o JSON continua válido.
-2. Rode `claude plugin marketplace add fabricadeasas/claude-plugins`. Sem o passo 1, esse comando é recusado; entre o passo 1 e o 2, o plugin fica sem carregar, então faça os dois em seguida.
-3. O passo 2 apaga o `autoUpdate`. Se ele estava ligado, acrescente `"autoUpdate": true` de novo na entrada.
-4. Confira com `claude plugin list`: os plugins da Fábrica de Asas aparecem como ligados.
-
-O modo de atualização das preferências (`updates`) continua valendo por cima disso: com `ask` ou `manual`, o plugin se atualiza mas as preferências novas só entram quando a pessoa aceitar.
 
 ## Remover o plugin
 1. Rode `off` primeiro, para a pasta de preferências sair junto.

@@ -21,6 +21,7 @@ Por enquanto, o plugin existe só em português.
 | --- | --- |
 | **Preferências que se atualizam** | As diretrizes e o jeito de falar chegam e se renovam sem você mexer em nada |
 | **Versões sem jargão** | O Claude salva as versões do seu projeto e manda a cópia para o GitHub sozinho, num passo só. "Salva" nunca coloca nada no ar, e "publica" faz o caminho inteiro sem pedir ok a cada etapa. Você só ouve falar em "versão". Também dá para pedir direto: `/fabrica-de-asas:versionamento-salvar`, `-sincronizar`, `-baixar` e `-fundir` |
+| **Planejar antes de fazer** | Diga "vamos planejar" e o Claude investiga, faz perguntas em enquete, apresenta o plano e só começa depois do seu "pode fazer". É o modo plano do Claude Code, mas sem pedir permissão a cada ferramenta. Também dá para pedir direto: `/fabrica-de-asas:planejar` |
 | **Trava de segurança** | Comandos que apagariam versões ou mandariam senhas para a nuvem são bloqueados antes de rodar |
 | **Você no controle** | Mude uma preferência, desligue todas, ou escolha se as atualizações chegam sozinhas, com pergunta, ou só quando você pedir |
 
